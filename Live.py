@@ -1,6 +1,7 @@
+from CurrencyRouletteGame import CurrencyRouletteGame
 from GuessGame import GuessGame
 from MemoryGame import MemoryGame
-from CurrencyRouletteGame import CurrencyRouletteGame
+from Score import add_score
 
 
 class Live:
@@ -12,7 +13,7 @@ class Live:
     def welcome(self):
         self.username = input("Hi, What is your name?\n").title()
         greeting = f"Hello {self.username}! and welcome to the World of Games!\nHere you can find many cool games to " \
-                   f"play. "
+                   f"play."
         print(greeting)
 
     def load_game(self):
@@ -51,15 +52,19 @@ class Live:
 
         if self.game_type == 1:
             guessgame = GuessGame()
-            guessgame.play(difficulty=self.game_difficulty)
+            guessgame.welcome()
+            winning = guessgame.play(difficulty=self.game_difficulty)
+            self.is_winning(im_winning=winning)
             self.play_again()
         elif self.game_type == 2:
             memorygame = MemoryGame()
-            memorygame.play(difficulty=self.game_difficulty)
+            winning = memorygame.play(difficulty=self.game_difficulty)
+            self.is_winning(im_winning=winning)
             self.play_again()
         else:
             currencyroulettegame = CurrencyRouletteGame()
-            currencyroulettegame.play(difficulty=self.game_difficulty)
+            winning = currencyroulettegame.play(difficulty=self.game_difficulty)
+            self.is_winning(im_winning=winning)
             self.play_again()
 
     def play_again(self):
@@ -74,3 +79,10 @@ class Live:
             else:
                 print("Invalid answer, please try again.")
                 continue
+
+    def is_winning(self, im_winning):
+        if im_winning:
+            add_score(name=self.username, difficulty=self.game_difficulty)
+        else:
+            self.game_difficulty = 0
+            add_score(name=self.username, difficulty=self.game_difficulty)
