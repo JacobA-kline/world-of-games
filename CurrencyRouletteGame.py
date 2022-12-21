@@ -14,6 +14,9 @@ class CurrencyRouletteGame:
         self.interval2 = int
         self.is_winning = bool
 
+    def welcome(self):
+        print("Welcome to the Currency Roulette game.")
+
     def get_money_interval(self, difficulty):
         c = CurrencyRates()
         self.random_num = random.randint(difficulty * 10, difficulty * 15)
@@ -27,7 +30,8 @@ class CurrencyRouletteGame:
         while checking_user_input:
             try:
                 user_guess = int(input(
-                    f"Please guess how much is {self.random_num} {self.to_currency_kind} in {self.from_currency_kind}.\n"))
+                    f"Please guess how much is {self.random_num} {self.to_currency_kind} in "
+                    f"{self.from_currency_kind}.\n"))
             except ValueError:
                 print("please enter numbers only.")
                 continue

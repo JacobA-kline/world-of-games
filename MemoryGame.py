@@ -20,6 +20,9 @@ class MemoryGame:
         self.user_list = []
         self.is_winning = bool
 
+    def welcome(self):
+        print("Welcome to the Memory Game.")
+
     def generate_sequence(self, difficulty):
         self.number_list = [random.randrange(1, 101) for _ in range(difficulty)]
         print(f"Try and remember these : {(' '.join(map(str, self.number_list)))}")

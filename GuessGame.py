@@ -7,6 +7,9 @@ class GuessGame:
         self.user_guess = int
         self.is_winning = bool
 
+    def welcome(self):
+        print("Welcome to the Guess Game.")
+
     def generate_number(self, number):
         self.secret_number = random.randint(1, number)
         return self.secret_number
