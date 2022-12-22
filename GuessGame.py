@@ -1,4 +1,5 @@
 import random
+import Utils
 
 
 class GuessGame:
@@ -15,7 +16,20 @@ class GuessGame:
         return self.secret_number
 
     def get_guess_from_user(self, difficulty):
-        self.user_guess = int(input(f"Please guess a number from 1 - {difficulty}:\n"))
+        testing_digit = True
+        while testing_digit:
+            try:
+                self.user_guess = int(input(f"Please guess a number from 1 - {difficulty}:\n"))
+            except ValueError:
+                print("Sorry, please enter numbers only.")
+                continue
+            else:
+
+                if self.user_guess != 0 and self.user_guess <= difficulty:
+                    testing_digit = False
+                else:
+                    print("Sorry, the number you entered is out of range. Please try again.")
+                    continue
         return self.user_guess
 
     def compare_results(self, secret, guess):
