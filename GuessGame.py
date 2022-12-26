@@ -1,5 +1,4 @@
 import random
-import Utils
 
 
 class GuessGame:
@@ -18,14 +17,13 @@ class GuessGame:
     def get_guess_from_user(self, difficulty):
         testing_digit = True
         while testing_digit:
-            try:
-                self.user_guess = int(input(f"Please guess a number from 1 - {difficulty}:\n"))
-            except ValueError:
+            self.user_guess = input(f"Please guess a number from 1 - {difficulty}:\n")
+            if not self.user_guess.isdigit():
                 print("Sorry, please enter numbers only.")
                 continue
             else:
-
-                if self.user_guess != 0 and self.user_guess <= difficulty:
+                if int(self.user_guess) != 0 and int(self.user_guess) <= difficulty:
+                    self.user_guess = int(self.user_guess)
                     testing_digit = False
                 else:
                     print("Sorry, the number you entered is out of range. Please try again.")
